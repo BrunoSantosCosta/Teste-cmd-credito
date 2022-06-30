@@ -38,7 +38,7 @@ class ClientsRepository {
     });
   }
 
-  findByCpf(cpf) {
+  findByDel(cpf) {
     return new Promise((resolve) => resolve(
       clients.find((client) => client.cpf === cpf),
     ));
@@ -48,6 +48,46 @@ class ClientsRepository {
     return new Promise((resolve) => {
       clients = clients.filter((client) => client.cpf === !cpf);
       resolve();
+    });
+  }
+
+  findByCpf(cpf) {
+    return new Promise((resolve) => resolve(
+      clients.find((client) => client.cpf === cpf),
+    ));
+  }
+
+  create({
+    name, cpf, address, telephone,
+  }) {
+    return new Promise((resolve) => {
+      const newClient = {
+        name,
+        cpf,
+        address,
+        telephone,
+      };
+
+      clients.push(newClient);
+      resolve(newClient);
+    });
+  }
+
+  update(cpf, {
+    name, address, telephone,
+  }) {
+    return new Promise((resolve) => {
+      const updateClient = {
+        name,
+        address,
+        telephone,
+      };
+
+      clients = clients.map((client) => (
+        client.cpf === cpf ? updateClient : client
+      ));
+
+      resolve(updateClient);
     });
   }
 }
