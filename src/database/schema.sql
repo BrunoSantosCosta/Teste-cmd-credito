@@ -1,0 +1,15 @@
+CREATE DATABASE app;
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE IF NOT EXISTS categories (
+  name VARCHAR NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS clients (
+  name VARCHAR NOT NULL,
+  email VARCHAR UNIQUE,
+  address VARCHAR,
+  phone VARCHAR
+);
